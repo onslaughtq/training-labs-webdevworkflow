@@ -13,10 +13,12 @@ module.exports = function( grunt ) {
 				dest: "dist/",
 				cwd: "src/"
 			}
-		}
+		},
+		clean: [ "dist/" ]
 	});
 
 	grunt.loadNpmTasks( "grunt-contrib-copy" );
+	grunt.loadNpmTasks( "grunt-contrib-clean" );
 
-	grunt.registerTask( "default", [ "copy" ] );
+	grunt.registerTask( "default", [ "clean","copy" ] );
 };
