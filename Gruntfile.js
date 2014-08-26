@@ -3,7 +3,7 @@ module.exports = function( grunt ) {
 		copy: {
 			js: {
 				expand: true,
-				src: [ "js/**/*.js" ],
+				src: [ "js/**/*.js", "!js/vendor/**/*.*" ],
 				dest: "dist/",
 				cwd: "src/"
 			},
@@ -12,6 +12,18 @@ module.exports = function( grunt ) {
 				src: [ "assets/*.*" ],
 				dest: "dist/",
 				cwd: "src/"
+			},
+			jquery: {
+				expand: true,
+				src: "jquery.min.js",
+				dest: "dist/js/vendor/",
+				cwd: "src/js/vendor/jquery/dist"
+			},
+			underscore: {
+				expand: true,
+				src: "underscore.js",
+				dest: "dist/js/vendor/",
+				cwd: "src/js/vendor/underscore"
 			}
 		},
 		clean: {
@@ -20,7 +32,8 @@ module.exports = function( grunt ) {
 		jshint: {
 			main: {
 				options: {
-					jshintrc: ".jshintrc"
+					jshintrc: ".jshintrc",
+					jshintignore: ".jshintignore"
 				},
 				files: {
 					src: [  "src/js/**/*.js"]
@@ -49,5 +62,5 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-contrib-jshint" );
 	grunt.loadNpmTasks( "grunt-contrib-uglify" );
 
-	grunt.registerTask( "default", [ "jshint","clean","copy" ] );
+	grunt.registerTask( "default", [ "clean","jshint","copy","uglify" ] );
 };
