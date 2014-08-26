@@ -26,12 +26,28 @@ module.exports = function( grunt ) {
 					src: [  "src/js/**/*.js"]
 				}
 			}
+		},
+		uglify: {
+			WebDev: {
+				options: {
+					sourceMap: true,
+					sourceMapName: "dist/js/sourcemap.map"
+				},
+				files: {
+					"dist/app.min.js": [ 
+							"dist/js/app.js",
+							"dist/js/models/*.js",
+							"dist/js/viewModels/*.js"
+						]
+				}
+			}
 		}
 	});
 
 	grunt.loadNpmTasks( "grunt-contrib-copy" );
 	grunt.loadNpmTasks( "grunt-contrib-clean" );
 	grunt.loadNpmTasks( "grunt-contrib-jshint" );
+	grunt.loadNpmTasks( "grunt-contrib-uglify" );
 
 	grunt.registerTask( "default", [ "jshint","clean","copy" ] );
 };
