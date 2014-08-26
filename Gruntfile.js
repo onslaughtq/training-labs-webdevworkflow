@@ -14,11 +14,24 @@ module.exports = function( grunt ) {
 				cwd: "src/"
 			}
 		},
-		clean: [ "dist/" ]
+		clean: {
+			files: [ "dist/" ]
+		},
+		jshint: {
+			main: {
+				options: {
+					jshintrc: ".jshintrc"
+				},
+				files: {
+					src: [  "src/js/**/*.js"]
+				}
+			}
+		}
 	});
 
 	grunt.loadNpmTasks( "grunt-contrib-copy" );
 	grunt.loadNpmTasks( "grunt-contrib-clean" );
+	grunt.loadNpmTasks( "grunt-contrib-jshint" );
 
-	grunt.registerTask( "default", [ "clean","copy" ] );
+	grunt.registerTask( "default", [ "jshint","clean","copy" ] );
 };
